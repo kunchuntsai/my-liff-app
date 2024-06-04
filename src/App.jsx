@@ -20,6 +20,17 @@ function App() {
       });
   });
 
+  const handleOpenCamera = () => {
+    liff
+      .scanCodeV2()
+      .then((result) => {
+        alert(`QR Code scanned: ${result.value}`);
+      })
+      .catch((error) => {
+        console.log("Error scanning code:", error);
+      });
+  };
+
   return (
     <div className="App">
       <h1>create-liff-app</h1>
@@ -29,6 +40,7 @@ function App() {
           <code>{error}</code>
         </p>
       )}
+      <p><button onClick={handleOpenCamera}>Open Camera</button></p>
       <a
         href="https://developers.line.biz/ja/docs/liff/"
         target="_blank"
