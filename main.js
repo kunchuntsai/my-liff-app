@@ -8,7 +8,7 @@ liff
   .then(() => {
     const appContainer = document.querySelector('#app');
     appContainer.innerHTML = `
-      <h1>PIA-LIFF-APP</h1>
+      <h1>PIA LIFF APP</h1>
       <p>LIFF init succeeded.</p>
     `;
 
@@ -29,18 +29,23 @@ liff
         const url = result.value;
         const newWindow = window.open(url, '_blank');
         if (!newWindow) {
-          // Popup blocked, handle error
+          // Popup blocked, handle error (log only)
           console.error('Failed to open URL. Popup may be blocked by the browser.');
         }
       })
       .catch((error) => {
         // Handle error
-        console.log("Error scanning code:", error);
+        console.error("Error scanning code:", error);
+        // Display error message in the current window
+        const errorText = `Error: ${error.message}`;
+        scanResultElement.textContent = errorText;
+        console.error(errorText);
       });
   })
   .catch((error) => {
+    console.error("LIFF initialization failed:", error);
     document.querySelector('#app').innerHTML = `
-      <h1>PIA-LIFF-APP</h1>
+      <h1>PIA LIFF APP</h1>
       <p>LIFF init failed.</p>
       <p><code>${error}</code></p>
     `;
