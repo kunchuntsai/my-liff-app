@@ -24,6 +24,14 @@ liff
           console.log("Scan code result:", result);
           // Display the scan result in the UI
           document.querySelector('#scanResult').textContent = `Scan Result: ${result.value}`;
+
+          // Open the scanned URL in a new window
+          const url = result.value;
+          const newWindow = window.open(url, '_blank');
+          if (!newWindow) {
+            // Popup blocked, handle error
+            console.error('Failed to open URL. Popup may be blocked by the browser.');
+          }
         })
         .catch((error) => {
           // Handle error
